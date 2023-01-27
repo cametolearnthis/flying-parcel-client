@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-const API_URL = "http://localhost:5005";
  
 const AuthContext = React.createContext();
  
@@ -8,6 +7,7 @@ function AuthProviderWrapper(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState(null);
+  const [isManager, setIsManager] = useState(true);
  
   
   const storeToken = (token) => {
@@ -23,7 +23,7 @@ function AuthProviderWrapper(props) {
     if (storedToken) {
       
       axios.get(
-        `${API_URL}/auth/verify`, 
+        `${process.env.REACT_APP_API_URL}/auth/verify`, 
         { headers: { Authorization: `Bearer ${storedToken}`} }
       )
       .then((response) => {
@@ -32,12 +32,15 @@ function AuthProviderWrapper(props) {
     
         setIsLoggedIn(true);
         setIsLoading(false);
-        setUser(user);        
+        setIsManager(user.isManager);  
+        setUser(user);
+              
       })
       .catch((error) => {      
         setIsLoggedIn(false);
         setIsLoading(false);
-        setUser(null);        
+        setUser(null);  
+        setIsManager(false);       
       });      
     } else {
 
@@ -70,6 +73,7 @@ function AuthProviderWrapper(props) {
         isLoggedIn,
         isLoading,
         user,
+        isManager,
         storeToken,
         authenticateUser,
         logOutUser        

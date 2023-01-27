@@ -1,19 +1,21 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
+import NavBar from "./components/NavBar";
 import HomePage from "./pages/HomePage";
 import DeliveryListPage from "./pages/DeliveryListPage";
 import DeliveryDetailsPage from "./pages/DeliveryDetailsPage";
 import ItemListPage from "./pages/ItemListPage";
+import ItemDetails from "./pages/ItemDetails";
 import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
 import IsPrivate from "./components/IsPrivate";
 import IsAnon from "./components/IsAnon";
+import IsManager from "./components/IsManager";
 
 function App() {
   return (
     <div className="App">
-      <Navbar />
+      <NavBar />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route
@@ -33,22 +35,22 @@ function App() {
           }
         />
          <Route
-          path="/items/"
+          path="/items"
+          element={
+            <IsManager>
+              <ItemListPage />
+            </IsManager>
+          }
+        />
+
+<Route
+          path="/items/:itemId"
           element={
             <IsPrivate>
-              <ItemListPage />
+              <ItemDetails />
             </IsPrivate>
           }
         />
-        {/*
-        <Route
-          path="/tasks/edit/:taskId"
-          element={
-            <IsPrivate>
-              <EditTask />{" "}
-            </IsPrivate>
-          }
-        /> */}
 
         <Route
           path="/signup"
