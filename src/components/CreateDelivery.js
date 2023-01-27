@@ -7,7 +7,7 @@ function CreateDelivery(props) {
     const [date, setDate] = useState("");
     const [shift, setShift] = useState("Morning");
 
-    const handleSubmit = (e) => {                          // <== ADD
+    const handleSubmit = (e) => {                          
         e.preventDefault();
      
         const requestBody = { delivererName, date, shift };

@@ -5,6 +5,8 @@ import CreateDelivery from "../components/CreateDelivery";
 
 function DeliveryListPage() {
   const [deliveries, setDeliveries] = useState([]);
+  const [showForm, setShowForm] = useState(true);
+
   const getAllDeliveries = () => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/api/deliveries`)
@@ -20,7 +22,15 @@ function DeliveryListPage() {
   return (
     <div>
 
-    <CreateDelivery refreshDeliveries={getAllDeliveries} />
+
+    {/* hide : show form */}
+    <button onClick={() => setShowForm(!showForm)}>
+        {showForm ? "Hide Form" : "Create Route"}
+      </button>
+      {showForm && <CreateDelivery refreshDeliveries={getAllDeliveries} />}
+
+
+    
 
       {deliveries.map((delivery) => {
         return (

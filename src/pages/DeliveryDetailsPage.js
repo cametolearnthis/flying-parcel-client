@@ -3,9 +3,9 @@ import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import AddItem from "../components/AddItem";
 
-
 function DeliveryDetailsPage(props) {
   const [delivery, setDelivery] = useState(null);
+  const [showForm, setShowForm] = useState(true);
   const { deliveryId } = useParams();
   const navigate = useNavigate();
 
@@ -36,23 +36,28 @@ function DeliveryDetailsPage(props) {
     <div>
       {delivery && (
         <>
-          <h1>{delivery.delivererName}</h1>
-          <p>{delivery.shift}</p>
+          <h1>These are the items assigned to {delivery.delivererName}</h1>
+          <p>Shift: {delivery.shift}</p>
         </>
       )}
+      <button onClick={() => setShowForm(!showForm)}>
+        {showForm ? "No more items" : "Add new item"}
+      </button>
+      {showForm && (
+        <AddItem refreshDelivery={getDelivery} deliveryId={deliveryId} />
+      )}
 
-      <AddItem refreshDelivery={getDelivery} deliveryId={deliveryId} />
-        <hr />
+      <hr />
       {delivery &&
         delivery.items.map((item) => (
           <>
-          <div key={item._id}>
-            <h3>{item.code}</h3>
-            <h4>{item.name}</h4>
-            <p>{item.address}</p>
-            <button>Delete Item</button>
-          </div>
-          <hr/>
+            <div key={item._id}>
+              <h3>{item.code}</h3>
+              <h4>{item.name}</h4>
+              <p>{item.address}</p>
+              <button>Delete Item</button>
+            </div>
+            <hr />
           </>
         ))}
 
