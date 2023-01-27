@@ -1,42 +1,73 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import { Button } from "bootstrap";
 
-function Navbar() {
-  const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
+function NavBar() {
+  const { isLoggedIn, user, logOutUser, isManager } = useContext(AuthContext);
   return (
-    <nav>
-      <Link to="/">
-        <button>Home</button>
-      </Link>
-      {isLoggedIn && (
-        <>
-          <Link to="/deliveries">
-            <button>Deliveries</button>
-          </Link>
-          <Link to="/items">
-            <button>Registered items</button>
-          </Link>
-
-          <button onClick={logOutUser}>Logout</button>
-          <span>Hello, {user && user.name}</span>
-        </>
-      )}
-
-      {!isLoggedIn && (
-        <>
-          <Link to="/signup">
-            {" "}
-            <button>Sign Up</button>{" "}
-          </Link>
-          <Link to="/login">
-            {" "}
-            <button>Login</button>{" "}
-          </Link>
-        </>
-      )}
-    </nav>
+    <>
+      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <Container>
+          <Navbar.Brand href="#home">Flying-parcel</Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="me-auto">
+              <Nav.Link as={Link} to="/">
+                Home
+              </Nav.Link>
+              {isLoggedIn && isManager && (
+                <>
+                  <Nav.Link as={Link} to="/deliveries">
+                    Deliveries
+                  </Nav.Link>
+                  <Nav.Link as={Link} to="/items">
+                    Items
+                  </Nav.Link>
+                </>
+              )}
+              {!isManager && isLoggedIn && (
+                <Nav.Link as={Link} to="/deliveries">
+                  Deliveries
+                </Nav.Link>
+              )}
+            </Nav>
+            <Nav>
+              {!isLoggedIn && (
+                <>
+                  <Nav.Link as={Link} to="/signup">
+                    Sign Up
+                  </Nav.Link>
+                  <Nav.Link as={Link} to="/login">
+                    Login
+                  </Nav.Link>
+                </>
+              )}
+              {!isManager && isLoggedIn && (
+                <>
+                  <span className="spanInNav">Hello, {user && user.name}</span>
+                  <Link className="signupButton" onClick={logOutUser}>
+                    Logout
+                  </Link>
+                </>
+              )}
+              {isManager && isLoggedIn && (
+                <>
+                  <span className="spanInNav">Hello, {user && user.name}</span>
+                  <Link className="signupButton" onClick={logOutUser}>
+                    Logout
+                  </Link>
+                </>
+              )}
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+    </>
   );
 }
 
-export default Navbar;
+export default NavBar;
