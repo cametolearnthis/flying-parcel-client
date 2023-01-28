@@ -1,5 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
+import Form from "react-bootstrap/Form";
+import { Button } from "react-bootstrap";
 
 function AddItem(props) {
   const [code, setCode] = useState("");
@@ -29,50 +31,63 @@ function AddItem(props) {
 
   return (
     <div>
-      <h3>Add New Item</h3>
+      <Form onSubmit={handleSubmit}>
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Code</Form.Label>
+          <Form.Control
+           type="text"
+           name="code"
+           placeholder="enter the code"
+           value={code}
+           minLength={11}
+           onChange={(e) => setCode(e.target.value)}
+          />
+        </Form.Group>
 
-      <form onSubmit={handleSubmit}>
-        <label>Code:</label>
-        <input
-          type="text"
-          name="code"
-          value={code}
-          minLength={11}
-          onChange={(e) => setCode(e.target.value)}
-        />
-        <br />
-        <label>Product:</label>
-        <select value={product} onChange={(e) => setProduct(e.target.value)}>
-        <option value=""></option>
-          <option value="Registered mail">Registered mail</option>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Product</Form.Label>
+          <Form.Select
+            aria-label="Default select example"
+            value={product} onChange={(e) => setProduct(e.target.value)}
+          >
+            <option>Select a product</option>
+            <option value="Registered mail">Registered mail</option>
           <option value="Small parcel">Small parcel</option>
           <option value="Medium parcel">Medium parcel</option>
           <option value="Big parcel">Big parcel</option>
           <option value="Tube">Tube</option>
           <option value="Urgent parcel">Urgent parcel</option>
           <option value="Bureaufax">Bureaufax</option>
-          <option value="Evening">Collecting</option>
-        </select>
-        <br />
-        <label>Name:</label>
-        <textarea
+          <option value="Collecting">Collecting</option>
+          </Form.Select>
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Name</Form.Label>
+          <Form.Control
           type="text"
           name="name"
+          placeholder="enter the name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-        />
-        <br />
-        <label>Address:</label>
-        <textarea
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Address</Form.Label>
+          <Form.Control
           type="text"
           name="address"
+          placeholder="enter the address"
           value={address}
           onChange={(e) => setAddress(e.target.value)}
-        />
-        <br />
-  
-        <button type="submit">Add to route</button>
-      </form>
+          />
+        </Form.Group>
+      <Button variant="primary" type="submit">
+          Submit
+        </Button>
+      </Form>
+      
     </div>
   );
 }

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import AddItem from "../components/AddItem";
+import { Button, Card } from "react-bootstrap";
 
 function DeliveryDetailsPage(props) {
   const [delivery, setDelivery] = useState(null);
@@ -40,10 +41,11 @@ function DeliveryDetailsPage(props) {
           <p>Shift: {delivery.shift}</p>
         </>
       )}
-      <button onClick={() => setShowForm(!showForm)}>
-        {showForm ? "No more items" : "Add new item"}
-      </button>
-      {showForm && (
+          <h3>Add New Item</h3>
+      <Button onClick={() => setShowForm(!showForm)}>
+        {!showForm ? "No more items" : "Add new item"}
+      </Button>
+      {!showForm && (
         <AddItem refreshDelivery={getDelivery} deliveryId={deliveryId} />
       )}
 
@@ -51,21 +53,27 @@ function DeliveryDetailsPage(props) {
       {delivery &&
         delivery.items.map((item) => (
           <>
-            <div key={item._id}>
-              <h3>{item.code}</h3>
-              <h4>{item.name}</h4>
-              <p>{item.address}</p>
-              <button>Delete Item</button>
-            </div>
-            <hr />
+            <Card key={item._id}>
+              <Card.Header>
+                <Link className="detailsButton" to={`/items/${item._id}`}>
+                  <h3>{item.code}</h3>
+                </Link>
+              </Card.Header>
+              <Card.Body>
+                <blockquote className="blockquote mb-0">
+                  <p>{item.name}</p>
+                  <p>{item.address}</p>
+                </blockquote>
+              </Card.Body>
+            </Card>
           </>
         ))}
 
       <Link to="/deliveries">
-        <button>Back to deliveries</button>
+        <Button>Back to deliveries</Button>
       </Link>
 
-      <button onClick={deleteDelivery}>Delete Delivery Route</button>
+      <Button variant="danger" onClick={deleteDelivery}>Delete Delivery Route</Button>
     </div>
   );
 }

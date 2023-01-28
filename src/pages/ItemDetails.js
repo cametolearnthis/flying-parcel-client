@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 function ItemDetails() {
   const [item, setItem] = useState(null);
@@ -43,11 +44,11 @@ function ItemDetails() {
       <hr />
 
 
-      <Link to="/items">
-        <button>Back to list of items</button>
+      <Link to={`/deliveries/`}>
+        <Button>Back to list of items</Button>
       </Link>
 
-      <button onClick={deleteItem}>Delete this item</button>
+      <Button variant="danger" onClick={deleteItem}>Delete this item</Button>
     </div>
   );
 }

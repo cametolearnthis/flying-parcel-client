@@ -1,11 +1,14 @@
 .spanInNav {
-  color: grey;
+  color: white;
   margin-right: 1rem;
 }
 .signupButton {
-  color: grey;
+  color: white;
   text-decoration: none;
 }
 .signupButton:hover {
   color: rgb(177, 170, 170);
+}
+.detailsButton {
+  text-decoration: none;
 }

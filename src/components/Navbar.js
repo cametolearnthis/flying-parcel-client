@@ -10,7 +10,7 @@ function NavBar() {
   const { isLoggedIn, user, logOutUser, isManager } = useContext(AuthContext);
   return (
     <>
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
         <Container>
           <Navbar.Brand href="#home">Flying-parcel</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />

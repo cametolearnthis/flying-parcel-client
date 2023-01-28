@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
  
  
 function SignupPage(props) {
@@ -35,34 +37,42 @@ function SignupPage(props) {
   return (
     <div>
       <h1>Sign Up</h1>
- 
-      <form onSubmit={handleSignupSubmit}>
-        <label>Email:</label>
-        <input 
+      <Form onSubmit={handleSignupSubmit}>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Email</Form.Label>
+          <Form.Control
           type="email"
           name="email"
+          placeholder="email@email.com"
           value={email}
           onChange={handleEmail}
-        />
- 
-        <label>Password:</label>
-        <input 
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
           type="password"
           name="password"
+          placeholder="password"
           value={password}
           onChange={handlePassword}
-        />
- 
-        <label>Name:</label>
-        <input 
-          type="text"
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Name</Form.Label>
+          <Form.Control
+          type="name"
           name="name"
+          placeholder="name"
           value={name}
           onChange={handleName}
-        />
- 
-        <button type="submit">Sign Up</button>
-      </form>
+          />
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          Submit
+        </Button>
+      </Form>
  
       { errorMessage && <p className="error-message">{errorMessage}</p> }
  

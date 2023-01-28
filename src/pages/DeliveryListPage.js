@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import CreateDelivery from "../components/CreateDelivery";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
 
 function DeliveryListPage() {
   const [deliveries, setDeliveries] = useState([]);
@@ -18,30 +20,34 @@ function DeliveryListPage() {
     getAllDeliveries();
   }, []);
 
-
   return (
     <div>
-
-
-   
-    <button onClick={() => setShowForm(!showForm)}>
-        {showForm ? "Hide Form" : "Create Route"}
-      </button>
-      {showForm && <CreateDelivery refreshDeliveries={getAllDeliveries} />}
-
-
-    
+      <h3>Create a new Delivery Route</h3>
+      <Button
+        className="differentButton"
+        onClick={() => setShowForm(!showForm)}
+      >
+        {!showForm ? "Hide Form" : "Create Route"}
+      </Button>
+      {!showForm && <CreateDelivery refreshDeliveries={getAllDeliveries} />}
 
       {deliveries.map((delivery) => {
         return (
-          <div key={delivery._id}>
-                <Link to={`/deliveries/${delivery._id}`}>
-                <h3>{delivery.delivererName}</h3>
-              </Link>
-              <h4>{delivery.date}</h4>
-              <h4>{delivery.shift}</h4>
-            
-          </div>
+          <>
+            <Card key={delivery._id}>
+              <Card.Header>
+                <Link className="detailsButton" to={`/deliveries/${delivery._id}`}>
+                  <h3>{delivery.delivererName}</h3>
+                </Link>
+              </Card.Header>
+              <Card.Body>
+                <blockquote className="blockquote mb-0">
+                  <p>{delivery.date}</p>
+                  <p>{delivery.shift}</p>
+                </blockquote>
+              </Card.Body>
+            </Card>
+          </>
         );
       })}
     </div>
