@@ -48,6 +48,8 @@ function ItemDetails() {
           <h1>{item.code}</h1>
           <p>Name: {item.name}</p>
           <p>Address: {item.address}</p>
+          <p>Result: {item.result}</p>
+          <Link to={`/items/edit/${itemId}`}><Button>Change result</Button></Link>
         </>
       )}
 
@@ -64,7 +66,7 @@ function ItemDetails() {
           <Modal.Title>Are you sure?</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Pleas confirm that you want to delete this item.
+          Please confirm that you want to delete this item.
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

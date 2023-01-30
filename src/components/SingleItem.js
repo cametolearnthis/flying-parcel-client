@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Button, Container, Card } from "react-bootstrap";
 
 
-function SingleItem ( { _id, name, address, code }) {
+function SingleItem ( { _id, name, address, code, result }) {
     return (
               <>
           <Container>

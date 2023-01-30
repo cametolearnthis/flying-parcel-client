@@ -12,6 +12,7 @@ import IsPrivate from "./components/IsPrivate";
 import IsAnon from "./components/IsAnon";
 import IsManager from "./components/IsManager";
 import EditDelivery from "./pages/EditDelivery";
+import EditItem from "./pages/EditItem";
 
 function App() {
   return (
@@ -35,7 +36,7 @@ function App() {
             </IsPrivate>
           }
         />
-                <Route
+        <Route
           path="deliveries/edit/:deliveryId"
           element={
             <IsManager>
@@ -43,7 +44,7 @@ function App() {
             </IsManager>
           }
         />
-         <Route
+        <Route
           path="/items"
           element={
             <IsManager>
@@ -52,7 +53,7 @@ function App() {
           }
         />
 
-<Route
+        <Route
           path="/items/:itemId"
           element={
             <IsPrivate>
@@ -60,6 +61,16 @@ function App() {
             </IsPrivate>
           }
         />
+        
+        <Route
+          path="items/edit/:itemId"
+          element={
+            <IsPrivate>
+              <EditItem />
+            </IsPrivate>
+          }
+        />
+      
 
         <Route
           path="/signup"
@@ -81,6 +92,5 @@ function App() {
     </div>
   );
 }
-
 
 export default App;
