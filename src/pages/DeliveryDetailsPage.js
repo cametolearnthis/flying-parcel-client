@@ -4,6 +4,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import AddItem from "../components/AddItem";
 import { Button, Card, Container } from "react-bootstrap";
 import { AuthContext } from "../context/auth.context";
+import Modal from "react-bootstrap/Modal";
 
 function DeliveryDetailsPage(props) {
   const { isManager} = useContext(AuthContext);
@@ -12,6 +13,11 @@ function DeliveryDetailsPage(props) {
   const [showForm, setShowForm] = useState(true);
   const { deliveryId } = useParams();
   const navigate = useNavigate();
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const getDelivery = () => {
     axios
@@ -85,8 +91,23 @@ function DeliveryDetailsPage(props) {
           </Link>
       }
  
+ <Button variant="danger" onClick={handleShow}>
+        Delete Delivery Route
+      </Button>
 
-      <Button variant="danger" onClick={deleteDelivery}>Delete Delivery Route</Button>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Are you sure?</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Please confirm that you want to delete this delivery route.</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Back
+          </Button>
+          <Button variant="danger" onClick={deleteDelivery}>Delete Delivery Route</Button>
+        </Modal.Footer>
+      </Modal>
+      
 
     </div>
   );

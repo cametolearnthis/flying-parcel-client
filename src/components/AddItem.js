@@ -1,7 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 import Form from "react-bootstrap/Form";
-import { Button } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container"
 
 function AddItem(props) {
   const [code, setCode] = useState("");
@@ -32,6 +33,7 @@ function AddItem(props) {
 
   return (
     <div>
+      <Container>
       <Form onSubmit={handleSubmit}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Code</Form.Label>
@@ -88,6 +90,7 @@ function AddItem(props) {
           Submit
         </Button>
       </Form>
+      </Container>
       
     </div>
   );
