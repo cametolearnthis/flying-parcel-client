@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import CreateDelivery from "../components/CreateDelivery";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import IsManager from "../components/IsManager";
+import dayjs from "dayjs";
 
 function DeliveryListPage() {
   const storedToken = localStorage.getItem("authToken");
@@ -21,6 +21,10 @@ function DeliveryListPage() {
   useEffect(() => {
     getAllDeliveries();
   }, []);
+  
+  
+  const test = new Date(deliveries[0]?.date).toDateString()
+  console.log(test);
 
   return (
     <div>
@@ -44,7 +48,7 @@ function DeliveryListPage() {
               </Card.Header>
               <Card.Body>
                 <blockquote className="blockquote mb-0">
-                  <p>{delivery.date}</p>
+                  <p>{new Date(delivery.date).toDateString()}</p>
                   <p>{delivery.shift}</p>
                 </blockquote>
               </Card.Body>
