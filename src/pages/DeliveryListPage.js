@@ -4,14 +4,16 @@ import { Link } from "react-router-dom";
 import CreateDelivery from "../components/CreateDelivery";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import IsManager from "../components/IsManager";
 
 function DeliveryListPage() {
+  const storedToken = localStorage.getItem("authToken");
   const [deliveries, setDeliveries] = useState([]);
   const [showForm, setShowForm] = useState(true);
 
   const getAllDeliveries = () => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/api/deliveries`)
+      .get(`${process.env.REACT_APP_API_URL}/api/deliveries`, { headers: { Authorization: `Bearer ${storedToken}` } })
       .then((response) => setDeliveries(response.data))
       .catch((error) => console.log("Error getting the deliveries", error));
   };

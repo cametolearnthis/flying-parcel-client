@@ -1,10 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import AddItem from "../components/AddItem";
-import { Button, Card } from "react-bootstrap";
+import { Button, Card, Container } from "react-bootstrap";
+import { AuthContext } from "../context/auth.context";
 
 function DeliveryDetailsPage(props) {
+  const { isManager} = useContext(AuthContext);
+  const storedToken = localStorage.getItem("authToken");
   const [delivery, setDelivery] = useState(null);
   const [showForm, setShowForm] = useState(true);
   const { deliveryId } = useParams();
@@ -12,7 +15,8 @@ function DeliveryDetailsPage(props) {
 
   const getDelivery = () => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/api/deliveries/${deliveryId}`)
+      .get(`${process.env.REACT_APP_API_URL}/api/deliveries/${deliveryId}`,
+      { headers: { Authorization: `Bearer ${storedToken}` } })
       .then((response) => {
         const singleDelivery = response.data;
         setDelivery(singleDelivery);
@@ -26,7 +30,8 @@ function DeliveryDetailsPage(props) {
 
   const deleteDelivery = () => {
     axios
-      .delete(`${process.env.REACT_APP_API_URL}/api/deliveries/${deliveryId}`)
+      .delete(`${process.env.REACT_APP_API_URL}/api/deliveries/${deliveryId}`,
+      { headers: { Authorization: `Bearer ${storedToken}` } })
       .then(() => {
         navigate("/deliveries");
       })
@@ -53,6 +58,7 @@ function DeliveryDetailsPage(props) {
       {delivery &&
         delivery.items.map((item) => (
           <>
+          <Container>
             <Card key={item._id}>
               <Card.Header>
                 <Link className="detailsButton" to={`/items/${item._id}`}>
@@ -66,14 +72,22 @@ function DeliveryDetailsPage(props) {
                 </blockquote>
               </Card.Body>
             </Card>
+            </Container>
           </>
         ))}
 
       <Link to="/deliveries">
         <Button>Back to deliveries</Button>
       </Link>
+      {isManager && 
+            <Link to={`/deliveries/edit/${deliveryId}`}>
+            <button>Edit delivery</button>
+          </Link>
+      }
+ 
 
       <Button variant="danger" onClick={deleteDelivery}>Delete Delivery Route</Button>
+
     </div>
   );
 }

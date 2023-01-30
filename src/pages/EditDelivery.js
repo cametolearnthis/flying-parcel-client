@@ -1,39 +1,53 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
+import { useParams, useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 
-function CreateDelivery(props) {
-  const [delivererName, setDelivererName] = useState("");
-  const [date, setDate] = useState("");
-  const [shift, setShift] = useState("Morning");
+ 
 
-  const handleSubmit = (e) => {
-    const storedToken = localStorage.getItem("authToken");
-    e.preventDefault();
+function EditDelivery () {
+    const storedToken = localStorage.getItem('authToken');
+    const [delivererName, setDelivererName] = useState("");
+    const [date, setDate] = useState("");
+    const [shift, setShift] = useState("");
 
-    const requestBody = { delivererName, date, shift };
-    axios
-      .post(`${process.env.REACT_APP_API_URL}/api/deliveries`, requestBody,
-      { headers: { Authorization: `Bearer ${storedToken}` } })
-      .then((response) => {
-        setDelivererName("");
-        setDate("");
-        setShift("");
+    const { deliveryId } = useParams();
+    const navigate = useNavigate(); 
+  
+    useEffect(() => {
+        axios
+        .get(`${process.env.REACT_APP_API_URL}/api/deliveries/${deliveryId}`, { headers: { Authorization: `Bearer ${storedToken}` } })
+        .then((response) => {
+          const singleDelivery = response.data;
 
-        props.refreshDeliveries();
-      })
-      .catch((error) => console.log(error));
-  };
+          setDelivererName(singleDelivery.delivererName);
+          setDate(singleDelivery.date);
+          setShift(singleDelivery.shift);
+        })
+        .catch((error) => console.log(error));
+    }, [deliveryId]);
 
-  return (
+    const handleFormSubmit = (e) => {                     
+        e.preventDefault();
+        const requestBody = { delivererName, date, shift };
+        axios
+          .put(`${process.env.REACT_APP_API_URL}/api/deliveries/${deliveryId}`, requestBody)
+          .then((response) => {
+            navigate(`/deliveries/${deliveryId}`)
+          });
+      };
+
+
+return (
     <div>
+        <h2>You are editing the route for {delivererName}</h2>
       <Container id="main-container" className="d-grid h-100">
         <Form
           id="create-form"
           className="text-center w-100"
-          onSubmit={handleSubmit}
+          onSubmit={handleFormSubmit}
         >
           <Form.Group className="mb-3 fs- fw-normal" controlId="formBasicEmail">
             <Form.Label>Name of the deliverer</Form.Label>
@@ -84,4 +98,5 @@ function CreateDelivery(props) {
   );
 }
 
-export default CreateDelivery;
+
+export default EditDelivery;

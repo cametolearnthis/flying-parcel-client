@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { Container } from "react-bootstrap";
  
  
 function SignupPage(props) {
@@ -37,6 +38,7 @@ function SignupPage(props) {
   return (
     <div>
       <h1>Sign Up</h1>
+      <Container>
       <Form onSubmit={handleSignupSubmit}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email</Form.Label>
@@ -73,6 +75,7 @@ function SignupPage(props) {
           Submit
         </Button>
       </Form>
+      </Container>
  
       { errorMessage && <p className="error-message">{errorMessage}</p> }
  

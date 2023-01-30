@@ -12,12 +12,13 @@ function AddItem(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    const storedToken = localStorage.getItem("authToken");
     const { deliveryId } = props;
     const requestBody = { code, name, address, product, deliveryId};
 
     axios
-    .post(`${process.env.REACT_APP_API_URL}/api/items`, requestBody)
+    .post(`${process.env.REACT_APP_API_URL}/api/items`, requestBody,
+    { headers: { Authorization: `Bearer ${storedToken}` } })
     .then((response) => {
         setCode("");
         setName("");

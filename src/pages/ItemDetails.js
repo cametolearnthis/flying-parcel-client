@@ -4,13 +4,14 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button } from "react-bootstrap";
 
 function ItemDetails() {
+  const storedToken = localStorage.getItem('authToken');
   const [item, setItem] = useState(null);
   const { itemId } = useParams();
   const navigate = useNavigate();
 
   const getItem = () => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/api/items/${itemId}`)
+      .get(`${process.env.REACT_APP_API_URL}/api/items/${itemId}`, { headers: { Authorization: `Bearer ${storedToken}` } })
       .then((response) => {
         const singleItem = response.data;
         setItem(singleItem);
@@ -24,7 +25,7 @@ function ItemDetails() {
 
   const deleteItem = () => {
     axios
-      .delete(`${process.env.REACT_APP_API_URL}/api/items/${itemId}`)
+      .delete(`${process.env.REACT_APP_API_URL}/api/items/${itemId}`, { headers: { Authorization: `Bearer ${storedToken}` } })
       .then(() => {
         navigate("/items");
       })

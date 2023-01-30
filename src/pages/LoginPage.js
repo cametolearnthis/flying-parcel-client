@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from '../context/auth.context';
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { Container } from "react-bootstrap";
+
  
 const API_URL = "http://localhost:5005";
  
@@ -47,6 +49,7 @@ function LoginPage(props) {
     <div className="LoginPage">
       <h1>Login</h1>
       <div>
+        <Container>
       <Form onSubmit={handleLoginSubmit}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email</Form.Label>
@@ -73,14 +76,14 @@ function LoginPage(props) {
           Submit
         </Button>
       </Form>
+      </Container>
     </div>
 
       { errorMessage && <p className="error-message">{errorMessage}</p> }
  
       <p>Don't have an account yet?</p>
       <Link to={"/signup"}> Sign Up</Link>
-    </div>
+      </div>
   )
 }
- 
 export default LoginPage;

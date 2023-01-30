@@ -11,6 +11,7 @@ import LoginPage from "./pages/LoginPage";
 import IsPrivate from "./components/IsPrivate";
 import IsAnon from "./components/IsAnon";
 import IsManager from "./components/IsManager";
+import EditDelivery from "./pages/EditDelivery";
 
 function App() {
   return (
@@ -32,6 +33,14 @@ function App() {
             <IsPrivate>
               <DeliveryDetailsPage />
             </IsPrivate>
+          }
+        />
+                <Route
+          path="deliveries/edit/:deliveryId"
+          element={
+            <IsManager>
+              <EditDelivery />
+            </IsManager>
           }
         />
          <Route
@@ -72,5 +81,6 @@ function App() {
     </div>
   );
 }
+
 
 export default App;
