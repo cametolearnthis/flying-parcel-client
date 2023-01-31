@@ -15,6 +15,6 @@
 .enter-data {
   width: 60%;
 }
-/* .single-item {
-  background-color: green;
-} */
+.single-item {
+  background-color: rgb(101, 188, 101);
+}

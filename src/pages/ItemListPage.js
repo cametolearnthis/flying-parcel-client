@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
-import { Form } from "react-bootstrap";
+import Form from "react-bootstrap/Form";
 import SingleItem from "../components/SingleItem";
 
 

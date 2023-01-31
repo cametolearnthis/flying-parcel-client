@@ -39,17 +39,21 @@ function App() {
         <Route
           path="deliveries/edit/:deliveryId"
           element={
-            <IsManager>
-              <EditDelivery />
-            </IsManager>
+            <IsPrivate>
+              <IsManager>
+                <EditDelivery />
+              </IsManager>
+            </IsPrivate>
           }
         />
         <Route
           path="/items"
           element={
-            <IsManager>
-              <ItemListPage />
-            </IsManager>
+            <IsPrivate>
+              <IsManager>
+                <ItemListPage />
+              </IsManager>
+            </IsPrivate>
           }
         />
 
@@ -61,7 +65,7 @@ function App() {
             </IsPrivate>
           }
         />
-        
+
         <Route
           path="items/edit/:itemId"
           element={
@@ -70,7 +74,6 @@ function App() {
             </IsPrivate>
           }
         />
-      
 
         <Route
           path="/signup"

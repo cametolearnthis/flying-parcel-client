@@ -12,7 +12,7 @@ function NavBar() {
     <>
       <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
         <Container>
-          <Navbar.Brand href="#home">Flying-parcel</Navbar.Brand>
+          <Navbar.Brand>Flying-parcel</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">

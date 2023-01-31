@@ -5,6 +5,7 @@ import CreateDelivery from "../components/CreateDelivery";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import dayjs from "dayjs";
+import { Container } from "react-bootstrap";
 
 function DeliveryListPage() {
   const storedToken = localStorage.getItem("authToken");
@@ -40,6 +41,7 @@ function DeliveryListPage() {
       {deliveries.map((delivery) => {
         return (
           <>
+          <Container>
             <Card key={delivery._id}>
               <Card.Header>
                 <Link className="detailsButton" to={`/deliveries/${delivery._id}`}>
@@ -53,6 +55,7 @@ function DeliveryListPage() {
                 </blockquote>
               </Card.Body>
             </Card>
+            </Container>
           </>
         );
       })}
