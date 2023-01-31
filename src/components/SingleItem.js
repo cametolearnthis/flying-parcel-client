@@ -6,7 +6,7 @@ function SingleItem ( { _id, name, address, code, result }) {
     return (
               <>
           <Container>
-            <Card>
+            <Card className="single-item">
               <Card.Header>
                 <Link className="detailsButton" to={`/items/${_id}`}>
                   <h3>{code}</h3>

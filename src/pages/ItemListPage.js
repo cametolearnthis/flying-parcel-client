@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import { Form } from "react-bootstrap";
+import SingleItem from "../components/SingleItem";
 
 
 function ItemListPage() {
@@ -53,27 +54,7 @@ function ItemListPage() {
 
 
       <CardGroup>
-      {itemsToDisplay.map((item) => {
-        return (
-          
-          
-          <Card key={item._id}>
-          
-            <Card.Body>
-              <Card.Title>            <Link className="detailsButton" to={`/items/${item._id}`}>
-            <h3>{item.code}</h3></Link ></Card.Title>
-              <Card.Title>
-              {item.name}
-              </Card.Title>
-              <Card.Text>
-              {item.address}
-          </Card.Text>
-            </Card.Body>
-          </Card>
-          
-          
-        );
-      })}
+      {itemsToDisplay.map((item) => <SingleItem key={item._id} {...item} />)}
       </CardGroup>
     </div>
   );
