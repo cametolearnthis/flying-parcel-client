@@ -13,9 +13,8 @@ function SingleItem({ _id, name, address, code, status, deliveryId }) {
               <Link className="detailsButton" to={`/items/${_id}`} key={deliveryId}>
                 <h3>{code}</h3>
               </Link>
-              <p>{name}</p>
-              <p>{address}</p>
-              <p>Status: {status}</p>
+              <p>To: {name}</p>
+              <p>Address: {address}</p>
             </blockquote>
           </Card.Body>
         </Card>
