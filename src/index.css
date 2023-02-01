@@ -15,6 +15,15 @@
 .enter-data {
   width: 60%;
 }
-.single-item {
+.pending {
+  background-color: rgb(240, 236, 230);
+}
+.delivered {
   background-color: rgb(101, 188, 101);
 }
+.not-delivered {
+  background-color: rgb(214, 128, 128);
+}
+
+
+

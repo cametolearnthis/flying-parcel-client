@@ -47,14 +47,23 @@ function DeliveryDetailsPage(props) {
       .catch((err) => console.log(err));
   };
 
+  let itemsCounter;
+  if(delivery) {
+    itemsCounter = <h3>Number of items assigned to this route: {delivery.items.length}</h3>
+  } else {
+    itemsCounter = <h3>There are no items assigned to this route</h3>
+  }
+
   return (
     <div>
       {delivery && (
         <>
-          <h1>These are the items assigned to {delivery.delivererName}</h1>
+          <h1>Route for {delivery.delivererName}</h1>
           <p>Shift: {delivery.shift}</p>
+          {itemsCounter}
         </>
       )}
+      
       <h3>Add New Item</h3>
       <Button onClick={() => setShowForm(!showForm)}>
         {!showForm ? "No more items" : "Add new item"}
@@ -65,7 +74,9 @@ function DeliveryDetailsPage(props) {
 
       <hr />
       {delivery &&
+     
         delivery.items.map((item) => <SingleItem key={item._id} {...item} />)}
+        
 
       <Link to="/deliveries">
         <Button variant="secondary">Back to deliveries</Button>

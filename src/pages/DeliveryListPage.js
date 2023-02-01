@@ -24,8 +24,7 @@ function DeliveryListPage() {
   }, []);
   
   
-  const test = new Date(deliveries[0]?.date).toDateString()
-  console.log(test);
+  
 
   return (
     <div>

@@ -9,7 +9,7 @@ import Container from "react-bootstrap/Container";
 
 function EditItem () {
     const storedToken = localStorage.getItem('authToken');
-    const [result, setResult] = useState("");
+    const [status, setStatus] = useState("");
     const [code, setCode] = useState("");
     const [name, setName] = useState("");
     const [address, setAddress] = useState("");
@@ -24,7 +24,7 @@ function EditItem () {
         .then((response) => {
           const singleItem = response.data;
           
-            setResult(singleItem.result);
+            setStatus(singleItem.status);
             setCode(singleItem.code);
             setName(singleItem.name);
             setAddress(singleItem.address);
@@ -36,7 +36,7 @@ function EditItem () {
 
     const handleFormSubmit = (e) => {                     
         e.preventDefault();
-        const requestBody = { result, code, address, product, name };
+        const requestBody = { status, code, address, product, name };
         axios
           .put(`${process.env.REACT_APP_API_URL}/api/items/${itemId}`, requestBody)
           .then((response) => {
@@ -47,7 +47,7 @@ function EditItem () {
 
 return (
     <div>
-        <h2>Set a result for the item with the code {code}</h2>
+        <h2>Set a status for the item with the code {code}</h2>
       <Container id="main-container" className="d-grid h-100">
         <Form
           id="create-form"
@@ -56,23 +56,23 @@ return (
         >
         
           <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Select a result</Form.Label>
+            <Form.Label>Select a status</Form.Label>
             <Form.Select
             className="enter-data"
               size="lg"
               aria-label="Default select example"
-              value={result}
-              onChange={(e) => setResult(e.target.value)}
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
             >
               <option></option>
-              <option value="Undefined">Undefined</option>
-              <option value="Delivered">Delivered</option>
-              <option value="Not delivered">Not delivered</option>
+              <option value="pending">pending</option>
+              <option value="delivered">delivered</option>
+              <option value="not-delivered">not delivered</option>
             </Form.Select>
           </Form.Group>
 
           <Button variant="primary" type="submit">
-            Set result
+            Set status
           </Button>
         </Form>
       </Container>

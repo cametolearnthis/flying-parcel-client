@@ -52,9 +52,9 @@ function ItemDetails({deliveryId}) {
           <h1>{item.code}</h1>
           <p>Name: {item.name}</p>
           <p>Address: {item.address}</p>
-          <p>Result: {item.result}</p>
+          <p>Status: {item.status}</p>
           <Link to={`/items/edit/${itemId}`}>
-            <Button>Change result</Button>
+            <Button>Change status</Button>
           </Link>
 
           <hr />
@@ -77,9 +77,11 @@ function ItemDetails({deliveryId}) {
               <Button variant="secondary" onClick={handleClose}>
                 Back
               </Button>
+              <Link to={`/deliveries/${item.delivery._id}`}>
               <Button variant="danger" onClick={deleteItem}>
                 Delete this item
               </Button>
+              </Link>
             </Modal.Footer>
           </Modal>
         </>

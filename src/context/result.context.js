@@ -1,3 +1,6 @@
-import { createContext } from "react";
+// import { createContext, useState } from "react";
 
-createContext
+// const ResultContext = createContext();
+
+
+// createContext

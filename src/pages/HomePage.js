@@ -1,8 +1,13 @@
+import "./HomePage.css"
+
 function HomePage() {
     return (
-      <div>
-        <h1>Home Page</h1>
+      
+      <div className="company-logo">
+        <h1>Welcome, deliverer</h1>
+        <div className="logo-image"></div>
       </div>
+      
     );
   }
    
