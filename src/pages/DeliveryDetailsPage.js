@@ -48,49 +48,69 @@ function DeliveryDetailsPage(props) {
   };
 
   let itemsCounter;
-  if(delivery) {
-    itemsCounter = <h3>Number of items assigned to this route: {delivery.items.length}</h3>
+  if (delivery) {
+    itemsCounter = (
+      <h3 className="items-counter">
+        Number of items assigned to this route: {delivery.items.length}
+      </h3>
+    );
   } else {
-    itemsCounter = <h3>There are no items assigned to this route</h3>
+    itemsCounter = <h3>There are no items assigned to this route</h3>;
   }
 
   return (
     <div>
       {delivery && (
-        <>
+        <div className="route-data">
           <h1>Route for {delivery.delivererName}</h1>
           <p>Shift: {delivery.shift}</p>
           {itemsCounter}
-        </>
-      )}
-      
-      <h3>Add New Item</h3>
-      <Button onClick={() => setShowForm(!showForm)}>
-        {!showForm ? "No more items" : "Add new item"}
-      </Button>
-      {!showForm && (
-        <AddItem refreshDelivery={getDelivery} deliveryId={deliveryId} />
+        </div>
       )}
 
-      <hr />
+      <div className="route-data">
+        <Button onClick={() => setShowForm(!showForm)}>
+          {!showForm ? "No more items" : "Add new item"}
+        </Button>
+        {!showForm && (
+          <AddItem refreshDelivery={getDelivery} deliveryId={deliveryId} />
+        )}
+      </div>
+
+      <div className="colour-key-map">
+        <div>
+          Delivered
+          <div className="delivered colour-key">
+
+          </div>
+        </div>
+        <div>
+
+          Not delivered <div className="not-delivered colour-key"></div>
+        </div>
+        <div>
+
+          Pending <div className="pending colour-key"></div>
+        </div>
+      </div>
+
       {delivery &&
-     
         delivery.items.map((item) => <SingleItem key={item._id} {...item} />)}
-        
 
-      <Link to="/deliveries">
-        <Button variant="secondary">Back to deliveries</Button>
-      </Link>
-      {isManager && (
-        <Link to={`/deliveries/edit/${deliveryId}`}>
-          <Button variant="primary">Edit delivery</Button>
+      <div className="delivery-options">
+        <Link to="/deliveries">
+          <Button variant="secondary">Back to deliveries</Button>
         </Link>
-      )}
+        {isManager && (
+          <Link to={`/deliveries/edit/${deliveryId}`}>
+            <Button variant="primary">Edit delivery</Button>
+          </Link>
+        )}
 
-      <Button variant="danger" onClick={handleShow}>
-        Delete Delivery Route
-      </Button>
-
+        <Button variant="danger" onClick={handleShow}>
+          Delete Route
+        </Button>
+      </div>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Are you sure?</Modal.Title>
@@ -103,7 +123,7 @@ function DeliveryDetailsPage(props) {
             Back
           </Button>
           <Button variant="danger" onClick={deleteDelivery}>
-            Delete Delivery Route
+            Delete Route
           </Button>
         </Modal.Footer>
       </Modal>

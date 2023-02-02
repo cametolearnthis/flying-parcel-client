@@ -1,14 +1,23 @@
-import "./HomePage.css"
+import "./HomePage.css";
+import { useContext } from "react";
+import { AuthContext } from "../context/auth.context";
 
 function HomePage() {
-    return (
-      
-      <div className="company-logo">
-        <h1>Welcome, deliverer</h1>
-        <div className="logo-image"></div>
-      </div>
-      
-    );
-  }
-   
-  export default HomePage;
+  const { isLoggedIn, user, LogOutUser } = useContext(AuthContext);
+  return (
+    <>
+      {!isLoggedIn && (
+        <div className="company-welcome">
+          <h1>Welcome, deliverer</h1>
+        </div>
+      )}
+      {isLoggedIn && (
+        <div className="company-welcome">
+          <h1>Welcome, {user && user.name}</h1>
+        </div>
+      )}
+    </>
+  );
+}
+
+export default HomePage;

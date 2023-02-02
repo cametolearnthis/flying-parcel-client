@@ -35,10 +35,11 @@ function ItemListPage() {
 
 
   return (
-    <div>
+    <>
+    <div className="items-searcher">
       <h2>List of items registered in the office</h2>
 
-      <Form className='form'>
+      <Form className='itesm-searcher-form'>
         <label>
             <input 
               type="text" 
@@ -49,12 +50,12 @@ function ItemListPage() {
               />
         </label>
       </Form>
-
-
+      </div>
+      
       <CardGroup>
       {itemsToDisplay.map((item) => <SingleItem key={item._id} {...item} />)}
       </CardGroup>
-    </div>
+      </>
   );
 }
 

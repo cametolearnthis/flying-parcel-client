@@ -5,44 +5,60 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 
- 
+function EditDelivery() {
+  const storedToken = localStorage.getItem("authToken");
+  const [delivererName, setDelivererName] = useState("");
+  const [date, setDate] = useState("");
+  const [shift, setShift] = useState("");
+  const [users, setUsers] = useState([]);
+  const [selectedUser, setSelectedUser] = useState("");
 
-function EditDelivery () {
-    const storedToken = localStorage.getItem('authToken');
-    const [delivererName, setDelivererName] = useState("");
-    const [date, setDate] = useState("");
-    const [shift, setShift] = useState("");
+  const { deliveryId } = useParams();
+  const navigate = useNavigate();
 
-    const { deliveryId } = useParams();
-    const navigate = useNavigate(); 
-  
-    useEffect(() => {
-        axios
-        .get(`${process.env.REACT_APP_API_URL}/api/deliveries/${deliveryId}`, { headers: { Authorization: `Bearer ${storedToken}` } })
-        .then((response) => {
-          const singleDelivery = response.data;
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/api/users/${deliveryId}`, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
+      .then((response) => {
+        const { data } = response;
 
-          setDelivererName(singleDelivery.delivererName);
-          setDate(singleDelivery.date);
-          setShift(singleDelivery.shift);
-        })
-        .catch((error) => console.log(error));
-    }, [deliveryId]);
+        setDelivererName(data.deliveryDetails.delivererName);
+        setDate(data.deliveryDetails.date);
+        setShift(data.deliveryDetails.shift);
+        setUsers(data.users);
+      })
+      .catch((error) => console.log(error));
+  }, [deliveryId]);
 
-    const handleFormSubmit = (e) => {                     
-        e.preventDefault();
-        const requestBody = { delivererName, date, shift };
-        axios
-          .put(`${process.env.REACT_APP_API_URL}/api/deliveries/${deliveryId}`, requestBody)
-          .then((response) => {
-            navigate(`/deliveries/${deliveryId}`)
-          });
-      };
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    const requestBody = { delivererName, date, shift,  };
+    if (selectedUser) {
+      requestBody.creator = selectedUser
+    }
+    // console.log(requestBody);
+    axios
+      .put(`${process.env.REACT_APP_API_URL}/api/deliveries/${deliveryId}`, requestBody)
+      .then((response) => {
+        // console.log(response.data)
+        navigate(`/deliveries/${deliveryId}`)
+      });
+  };
 
+  const handleSelection = (e) => {
+    setSelectedUser(e.target.value);
+    setDelivererName(() => {
+      const user = users.find((user) => user._id === e.target.value);
 
-return (
+      return user.name;
+    });
+  };
+
+  return (
     <div>
-        <h2>You are editing the route for {delivererName}</h2>
+      <h2>You are editing the route for {delivererName} </h2>
       <Container id="main-container" className="d-grid h-100">
         <Form
           id="create-form"
@@ -58,14 +74,23 @@ return (
               name="delivererName"
               placeholder="Enter the name of the deliverer"
               value={delivererName}
-              onChange={(e) => setDelivererName(e.target.value)}
+              // onChange={(e) => setDelivererName(e.target.value)}
             />
           </Form.Group>
+
+          <label> New Deliverer:
+            <select onChange={handleSelection} >
+              <option selected> Choose a deliverer </option>
+              {users.map((user) => (
+                <option value={user._id} >{user.name}</option>
+              ))}
+            </select>
+          </label>
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Date of the route</Form.Label>
             <Form.Control
-            className="enter-data"
+              className="enter-data"
               size="lg"
               type="date"
               name="date"
@@ -77,7 +102,7 @@ return (
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Shift</Form.Label>
             <Form.Select
-            className="enter-data"
+              className="enter-data"
               size="lg"
               aria-label="Default select example"
               value={shift}
@@ -97,6 +122,5 @@ return (
     </div>
   );
 }
-
 
 export default EditDelivery;

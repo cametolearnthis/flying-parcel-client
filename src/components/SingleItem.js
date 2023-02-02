@@ -7,13 +7,12 @@ function SingleItem({ _id, name, address, code, status, deliveryId }) {
   return (
     <>
       <Container>
-        <Card className="single-item">
-          <Card.Body className={`single-item ${status}`}>
+        <Card>
+          <Card.Body className={status}>
             <blockquote className="blockquote mb-0">
               <Link className="detailsButton" to={`/items/${_id}`} key={deliveryId}>
                 <h3>{code}</h3>
               </Link>
-              <p>To: {name}</p>
               <p>Address: {address}</p>
             </blockquote>
           </Card.Body>
