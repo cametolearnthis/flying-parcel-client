@@ -34,16 +34,19 @@ function EditDelivery() {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    const requestBody = { delivererName, date, shift,  };
+    const requestBody = { delivererName, date, shift };
     if (selectedUser) {
-      requestBody.creator = selectedUser
+      requestBody.creator = selectedUser;
     }
     // console.log(requestBody);
     axios
-      .put(`${process.env.REACT_APP_API_URL}/api/deliveries/${deliveryId}`, requestBody)
+      .put(
+        `${process.env.REACT_APP_API_URL}/api/deliveries/${deliveryId}`,
+        requestBody
+      )
       .then((response) => {
         // console.log(response.data)
-        navigate(`/deliveries/${deliveryId}`)
+        navigate(`/deliveries/${deliveryId}`);
       });
   };
 
@@ -65,28 +68,22 @@ function EditDelivery() {
           className="text-center w-100"
           onSubmit={handleFormSubmit}
         >
-          <Form.Group className="mb-3 fs- fw-normal" controlId="formBasicEmail">
-            <Form.Label>Name of the deliverer</Form.Label>
-            <Form.Control
+
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>New Deliverer</Form.Label>
+            <Form.Select
               className="enter-data"
               size="lg"
-              type="text"
-              name="delivererName"
-              placeholder="Enter the name of the deliverer"
-              value={delivererName}
-              // onChange={(e) => setDelivererName(e.target.value)}
-            />
-          </Form.Group>
-
-          <label> New Deliverer:
-            <select onChange={handleSelection} >
-              <option selected> Choose a deliverer </option>
+              aria-label="Default select example"
+              value={shift}
+              onChange={(e) => setShift(e.target.value)}
+            >
+              <option>Select a deliverer</option>
               {users.map((user) => (
-                <option value={user._id} >{user.name}</option>
+                <option value={user._id}>{user.name}</option>
               ))}
-            </select>
-          </label>
-
+            </Form.Select>
+          </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Date of the route</Form.Label>
             <Form.Control

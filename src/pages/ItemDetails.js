@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal, Card, Container } from "react-bootstrap";
 
 function ItemDetails({deliveryId}) {
   const storedToken = localStorage.getItem("authToken");
@@ -44,24 +44,39 @@ function ItemDetails({deliveryId}) {
   
 
   return (
-    <div>
+    <div className="item-data">
       {item && (
+                  
         <>
-
-          {/* Item Details */}
-          <h1>{item.code}</h1>
-          <p>Name: {item.name}</p>
+        {/* Item Details */}
+        <div >
+      <Card className={item.status} style={{ width: '18rem' }}>
+      
+      <Card.Body>
+        <Card.Title>{item.code}</Card.Title>
+        <Card.Text>
+        <p>Name: {item.name}</p>
           <p>Address: {item.address}</p>
           <p>Status: {item.status}</p>
-          <Link to={`/items/edit/${itemId}`}>
+          {item.imageUrl
+          ?  <Card.Img  src={item.imageUrl} alt="item" width="200" />
+          : <Card.Img src="https://via.placeholder.com/200x180.png?text=Image+not+provided"  alt=""/>
+        }
+         
+        </Card.Text>
+        <Link to={`/items/edit/${itemId}`}>
             <Button>Change status</Button>
           </Link>
+      </Card.Body>
+    </Card>
+    </div>
 
-          <hr />
 
+
+        <div className="options">
           {/* Nav Links */}
           <Link to={`/deliveries/${item.delivery._id}`}>
-            <Button>Back to list of items</Button>
+            <Button>Back to items</Button>
           </Link>
           <Button variant="danger" onClick={handleShow}>
             Delete item
@@ -77,13 +92,14 @@ function ItemDetails({deliveryId}) {
               <Button variant="secondary" onClick={handleClose}>
                 Back
               </Button>
-              <Link to={`/deliveries/${item.delivery._id}`}>
+              <Link to={`/deliveries/${item.delivery}`}>
               <Button variant="danger" onClick={deleteItem}>
                 Delete this item
               </Button>
               </Link>
             </Modal.Footer>
           </Modal>
+          </div>
         </>
       )}
     </div>

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Container, Card } from "react-bootstrap";
 import { useState } from "react";
 
-function SingleItem({ _id, name, address, code, status, deliveryId }) {
+function SingleItem({ _id, name, address, code, status, deliveryId, imageUrl }) {
 
   return (
     <>

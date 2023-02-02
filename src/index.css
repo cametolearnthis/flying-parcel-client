@@ -62,4 +62,23 @@
   height: 15px;
   border-radius: 50%;
 }
+.item-data {
+  margin: 10% 40%;
+}
+.options {
+  width: 24vw;
+  margin-left: -0.5vw;
+  margin-top: 4vh;
+  display: flex;
+  justify-content: space-evenly;
 
+}
+
+.submit-botton {
+  margin-top: 4vh;
+}
+
+.add-items {
+  margin: 6vh 10vw;
+  
+}
