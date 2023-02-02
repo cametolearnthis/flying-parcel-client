@@ -16,7 +16,7 @@
   width: 60%;
 }
 .pending {
-  background-color: rgb(240, 236, 230);
+  background-color: rgb(217, 214, 209);
 }
 .delivered {
   background-color: rgb(101, 188, 101);
@@ -24,6 +24,42 @@
 .not-delivered {
   background-color: rgb(214, 128, 128);
 }
-
-
+.creation-menu {
+  margin-top: 5vh;
+}
+.different-button {
+  margin-bottom: 20vh;
+}
+.single-item {
+  margin: 5vh;
+}
+.create-title {
+  margin-bottom: 5vh;
+}
+.route-data {
+  margin: 5vh 0 5vh 0;
+}
+.delivery-options {
+  margin: 10vh;
+}
+.delivery-options a, button {
+  padding: 2vh 2vh;
+}
+.items-searcher {
+  margin: 10vh 0;
+}
+.items-searcher h2 {
+  margin-bottom: 10vh;
+}
+.colour-key-map{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-bottom: 10vh;
+}
+.colour-key {
+  width:15px;
+  height: 15px;
+  border-radius: 50%;
+}
 
