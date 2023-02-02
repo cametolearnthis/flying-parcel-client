@@ -4,7 +4,6 @@ import { AuthContext } from "../context/auth.context";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { Button } from "bootstrap";
 
 function NavBar() {
   const { isLoggedIn, user, logOutUser, isManager } = useContext(AuthContext);

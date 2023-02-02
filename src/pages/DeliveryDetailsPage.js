@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import AddItem from "../components/AddItem";
-import { Button, Card, Container } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { AuthContext } from "../context/auth.context";
 import Modal from "react-bootstrap/Modal";
 import SingleItem from "../components/SingleItem";
@@ -80,22 +80,22 @@ function DeliveryDetailsPage(props) {
       <div className="colour-key-map">
         <div>
           Delivered
-          <div className="delivered colour-key">
-
-          </div>
+          <div className="delivered colour-key"></div>
         </div>
         <div>
-
           Not delivered <div className="not-delivered colour-key"></div>
         </div>
         <div>
-
           Pending <div className="pending colour-key"></div>
         </div>
       </div>
 
       {delivery &&
-        delivery.items.map((item) => <SingleItem key={item._id} {...item} />)}
+        delivery.items.map((item) => (
+          <div className="item-separation">
+            <SingleItem key={item._id} {...item} />
+          </div>
+        ))}
 
       <div className="delivery-options">
         <Link to="/deliveries">

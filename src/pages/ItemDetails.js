@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { Button, Modal, Card, Container } from "react-bootstrap";
+import { Button, Modal, Card } from "react-bootstrap";
 
 function ItemDetails({deliveryId}) {
   const storedToken = localStorage.getItem("authToken");
@@ -76,8 +76,9 @@ function ItemDetails({deliveryId}) {
         <div className="options">
           {/* Nav Links */}
           <Link to={`/deliveries/${item.delivery._id}`}>
-            <Button>Back to items</Button>
+            <Button>Back</Button>
           </Link>
+          <br/>
           <Button variant="danger" onClick={handleShow}>
             Delete item
           </Button>

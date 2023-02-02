@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 
 function HomePage() {
-  const { isLoggedIn, user, LogOutUser } = useContext(AuthContext);
+  const { isLoggedIn, user} = useContext(AuthContext);
   return (
     <>
       {!isLoggedIn && (
