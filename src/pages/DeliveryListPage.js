@@ -46,16 +46,23 @@ function DeliveryListPage() {
     <div>
       <div className="creation-menu">
         <h3 className="create-title">Create a new Delivery Route</h3>
+        <div className="display-form">
         <Button
           className="differentButton"
           onClick={() => setShowForm(!showForm)}
         >
           {!showForm ? "Hide Form" : "Create Route"}
         </Button>
+        
         {!showForm && (
+          <>
+          <br />
           <CreateDelivery refreshDeliveries={getAllDeliveries} users={users} />
+          </>
         )}
+        </div>
       </div>
+
       {deliveries.map((delivery) => {
         return (
           <>

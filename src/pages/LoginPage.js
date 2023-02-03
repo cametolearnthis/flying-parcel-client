@@ -46,7 +46,7 @@ function LoginPage(props) {
   
   return (
     <div className="LoginPage">
-      <h1>Login</h1>
+      <h2>Login</h2>
       <div>
         <Container>
       <Form onSubmit={handleLoginSubmit}>

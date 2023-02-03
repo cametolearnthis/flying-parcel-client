@@ -37,7 +37,7 @@ function SignupPage(props) {
   
   return (
     <div>
-      <h1>Sign Up</h1>
+      <h2>Sign Up</h2>
       <Container>
       <Form onSubmit={handleSignupSubmit}>
         <Form.Group className="mb-3" controlId="formBasicEmail">

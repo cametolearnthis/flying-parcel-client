@@ -6,26 +6,27 @@ import Container from "react-bootstrap/Container";
 import { AuthContext } from "../context/auth.context";
 
 function CreateDelivery(props) {
-  const { isManager } = useContext(AuthContext)
+  const { isManager } = useContext(AuthContext);
   const [date, setDate] = useState("");
   const [shift, setShift] = useState("Morning");
-  const [selectedUser, setSelectedUser] = useState("")
+  const [selectedUser, setSelectedUser] = useState("");
   console.log(props.users);
 
   const handleSubmit = (e) => {
     const storedToken = localStorage.getItem("authToken");
     e.preventDefault();
-    const user = props.users.find(user => user._id === selectedUser)
+    const user = props.users.find((user) => user._id === selectedUser);
     const requestBody = { date, shift };
-    
+
     if (selectedUser) {
-      requestBody.delivererName = user.name
-      requestBody.creator = selectedUser
+      requestBody.delivererName = user.name;
+      requestBody.creator = selectedUser;
     }
-  
+
     axios
-      .post(`${process.env.REACT_APP_API_URL}/api/deliveries`, requestBody,
-      { headers: { Authorization: `Bearer ${storedToken}` } })
+      .post(`${process.env.REACT_APP_API_URL}/api/deliveries`, requestBody, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
       .then((response) => {
         setDate("");
         setShift("");
@@ -43,21 +44,28 @@ function CreateDelivery(props) {
           className="text-center w-100"
           onSubmit={handleSubmit}
         >
-          {isManager && 
-             <label> New Deliverer:
-             <select onChange={(e) => setSelectedUser(e.target.value)} >
-               <option selected> Choose a deliverer </option>
-               { props.users.map((user) => (
-                 <option value={user._id} >{user.name}</option>
-               ))}
-             </select>
-           </label>
-          }
-          
+          {isManager && (
+            <Form.Group className="mb-3" controlId="formBasicShift">
+              <Form.Label>New Deliverer</Form.Label>
+              <Form.Select
+                className="enter-data"
+                size="lg"
+                aria-label="Default select example"
+                value={selectedUser}
+                onChange={(e) => setSelectedUser(e.target.value)}
+              >
+                <option>Select a deliverer</option>
+                {props.users.map((user) => (
+                  <option value={user._id}>{user.name}</option>
+                ))}
+              </Form.Select>
+            </Form.Group>
+          )}
+
           <Form.Group className="mb-3" controlId="formBasicDate">
             <Form.Label>Date of the route</Form.Label>
             <Form.Control
-            className="enter-data"
+              className="enter-data"
               size="lg"
               type="date"
               name="date"
@@ -69,7 +77,7 @@ function CreateDelivery(props) {
           <Form.Group className="mb-3" controlId="formBasicShift">
             <Form.Label>Shift</Form.Label>
             <Form.Select
-            className="enter-data"
+              className="enter-data"
               size="lg"
               aria-label="Default select example"
               value={shift}

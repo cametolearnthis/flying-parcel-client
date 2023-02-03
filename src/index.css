@@ -25,7 +25,7 @@
   background-color: rgb(214, 128, 128);
 }
 .creation-menu {
-  margin-top: 5vh;
+  margin: 5vh 5vw;
 }
 .different-button {
   margin-bottom: 20vh;
@@ -85,6 +85,9 @@
 
 .item-separation {
   margin: 0.5vh 0;
+}
+.display-form {
+  margin: 5vh 0;
 }
 
 @media (max-width: 480px) {

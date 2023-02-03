@@ -62,7 +62,7 @@ function DeliveryDetailsPage(props) {
     <div>
       {delivery && (
         <div className="route-data">
-          <h1>Route for {delivery.delivererName}</h1>
+          <h2>Route for {delivery.delivererName}</h2>
           <p>Shift: {delivery.shift}</p>
           {itemsCounter}
         </div>
