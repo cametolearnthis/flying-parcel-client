@@ -76,7 +76,7 @@ function ItemDetails({deliveryId}) {
         <div className="options">
           {/* Nav Links */}
           <Link to={`/deliveries/${item.delivery._id}`}>
-            <Button>Back</Button>
+            <Button>Back to delivery</Button>
           </Link>
           <br/>
           <Button variant="danger" onClick={handleShow}>
